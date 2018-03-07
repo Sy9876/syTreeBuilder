@@ -10,25 +10,50 @@ public class MyNode extends MyComponent {
 	private List<MyComponent> items = new ArrayList<MyComponent>();
 	private String href;
 	
-	public MyComponent findNodeById(String menuId) {
-		if(menuId.equals(this.getTitle())) {
-			return this;
+	public void append(MyComponent myComponent) {
+		String menuId = myComponent.getTitle();
+		String parentId = myComponent.getParentId();
+		
+//		System.out.println("MyNode.append menuId=" + menuId + "  parentId=" + parentId);
+		
+		if(parentId.equals(this.getTitle())) {
+			// 当前节点是item的父节点，则加入list
+			items.add(myComponent);
 		}
 		else {
-			MyComponent tmp = this;
-			for(MyComponent comp : items) {
-				tmp = comp.findNodeById(menuId);
-				if(tmp!=null) {
-					return tmp;
+			// 当前节点不是item的父节点
+			MyComponent comp = null;
+			for(int i=0;i<items.size();i++) {
+				comp = items.get(i);
+				// 在子节点中查找item的父节点
+				if(parentId.equals(comp.getTitle())) {
+					// 如果item的父节点是node，在直接添加
+					if(comp instanceof MyNode) {
+						comp.append(myComponent);
+					}
+					// 如果item的父节点是leaf，则把leaf转换成node，再添加
+					else if(comp instanceof MyLeaf) {
+						MyNode myNode = leafToNode((MyLeaf)comp);
+						myNode.append(myComponent);
+						items.set(i, myNode);
+					}
+				}
+				else {
+					// 如果不是item的父节点，则向下委托
+					comp.append(myComponent);
 				}
 			}
 		}
 		
-		return null;
 	}
 	
-	public void append(MyComponent myComponent) {
-		items.add(myComponent);
+	private MyNode leafToNode(MyLeaf myLeaf) {
+		MyNode myNode = new MyNode();
+		myNode.setTitle(myLeaf.getTitle());
+		myNode.setIcon(myLeaf.getIcon());
+		myNode.setParentId(myLeaf.parentId);
+		myNode.setHref("#");
+		return myNode;
 	}
 	
 	

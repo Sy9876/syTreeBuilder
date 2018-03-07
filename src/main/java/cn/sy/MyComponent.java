@@ -5,9 +5,7 @@ public abstract class MyComponent {
 	protected String icon;
 	protected String parentId;
 	
-	protected abstract MyComponent findNodeById(String menuId);
 	protected abstract void append(MyComponent myComponent);
-	
 	
 	public String getParentId() {
 		return parentId;

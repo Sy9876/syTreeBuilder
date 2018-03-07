@@ -14,7 +14,7 @@ public class MenuData {
 		"HME_00_00	home	app.home	2		10_00_00",
 		"MDM_00_00	gear	app.md	2		20_00_00",
 		"MDM_10_00	file-text-o	app.md.station	3	MDM_00_00	20_10_00",
-		"MDM_10_10	file-text-o	app.md.station.x	3	MDM_10_00	20_10_00",
+		"MDM_10_10	file-text-o	app.md.station.xxx	3	MDM_10_00	20_10_00",
 		"MDM_20_00	file-text-o	app.md.location	3	MDM_00_00	20_20_00",
 		"MDM_30_00	file-text-o	app.md.user	3	MDM_00_00	20_30_00",
 		"MDM_40_00	file-text-o	app.md.perm	3	MDM_00_00	20_40_00",
@@ -29,7 +29,7 @@ public class MenuData {
 		Map<String, String> map = new HashMap<String, String>();
 		String[] keys = {"menuId", "menuIcon", "routeState", "type", "parentId", "sortKey"};
 		String[] fields = line.split("\t");
-		System.out.println("fields=" + fields);
+//		System.out.println("fields=" + fields);
 		
 		for(int i=0;i<6;i++) {
 			map.put(keys[i], fields[i]);

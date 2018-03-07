@@ -6,17 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MyLeaf extends MyComponent {
 	private String sref;
 
-	
-	public MyComponent findNodeById(String menuId) {
-		if(menuId.equals(this.getTitle())) {
-			return this;
-		}
-
-		return null;
-	}
-	
 	public void append(MyComponent myComponent) {
-		throw new RuntimeException("unsupport method append");
+//		throw new RuntimeException("unsupport method append");
 	}
 	
 	@Override
